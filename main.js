@@ -1,6 +1,7 @@
 const jsdom = require("jsdom");
 const fs = require("fs");
 const request = require("request");
+const allMatchPageObj = require("./allMatch");
 
 let url =
   "https://www.espncricinfo.com/series/indian-premier-league-2022-1298423";
@@ -27,6 +28,6 @@ function extractData(html){
     let link = output[0].getAttribute("href");
     
     let allMatchLinks = `https://www.espncricinfo.com${link}`;
-    
-    console.log(allMatchLinks);
+
+    allMatchPageObj.allMatchFn(allMatchLinks);
 }

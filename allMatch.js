@@ -1,11 +1,16 @@
 const jsdom = require("jsdom");
 let fs = require("fs");
 let request = require("request");
+let scorecardObj = require("./scorecard");
 
-let url =
-  "https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/match-results";
+// let url =
+//   "https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/match-results";
 
-request(url, cb);
+// request(url, cb);
+
+function allMatchExecutor(url){
+    request(url,cb)
+}
 
 function cb(error, response, body) {
   if (error) {
@@ -33,6 +38,12 @@ function extractData(html) {
     );
     let scoreLink = link[2].getAttribute("href");
     let fullScoreLink = `https://www.espncricinfo.com${scoreLink}`;
-    console.log(fullScoreLink);
+
+    scorecardObj.scorecardFn(fullScoreLink);
+    // console.log(fullScoreLink);
   }
+}
+
+module.exports = {
+    allMatchFn: allMatchExecutor
 }
